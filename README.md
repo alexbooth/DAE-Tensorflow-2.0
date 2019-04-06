@@ -14,6 +14,7 @@ Begin training the model with ```train.py```
 --logdir          dir  (optional) String: log file directory
 --keep_training        (optional) loads the most recently saved weights and continues training
 --keep_best            (optional) save model only if it has the best loss so far
+--help
 ```
 Sample the training model with ```sample.py```  
 Note: Do not run sample.py and train.py at the same time, tensorflow will crash.
@@ -21,6 +22,7 @@ Note: Do not run sample.py and train.py at the same time, tensorflow will crash.
 --sample_size     n    (optional) Integer: number of samples to test
 --model       filepath (required) String: path to a trained model (.h5 file)
 --use_noise            (optional) adds noise to samples before feeding into the autoencoder
+--help
 ```
 
 ## References
