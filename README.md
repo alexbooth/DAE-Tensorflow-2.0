@@ -3,11 +3,12 @@
 Demo of a DAE with eager execution in TF2 using the MNIST dataset. 
 
 <p align="center"><img src="sample_images/z2-sampled.gif"></p>
-The above GIF shows the latent space of a DAE trained on MNIST (using the model in this repo) that is sampled from the decoder at at epochs 0..60. The latent space above was bound to 2 dimensions with each in (-1, 1).  
+The above GIF shows the latent space of a DAE trained on MNIST (using the model in this repo) that is sampled from the decoder at at epochs 0..60. The latent space above was bound to 2 dimensions with each in (-1, 1). 
+
 Denoising (z=32):
-<p align="center"><img src="sample_images/z32-denoised.gif"></p>  
+<p align="center"><img src="sample_images/z32-denoised.png"></p>  
 Input without noise (z=32):
-<p align="center"><img src="sample_images/z32-no-noise.gif"></p>
+<p align="center"><img src="sample_images/z32-no-noise.png"></p>
 
 
 ## Usage
