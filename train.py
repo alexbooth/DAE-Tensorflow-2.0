@@ -50,7 +50,8 @@ def save_model(model, epoch, loss):
         tf.summary.scalar("loss", loss, step=epoch)
 
     # save checkpoint
-    checkpoint_path = os.path.join(FLAGS.checkpoint_dir, timestamp, "ckpt")
+    #checkpoint_path = os.path.join(FLAGS.checkpoint_dir, timestamp, "ckpt")
+    checkpoint_path = os.path.join(FLAGS.checkpoint_dir, "ckpt")
     model.save_weights(checkpoint_path, save_format="tf")
 
     # save model if it has the best loss so far
@@ -67,9 +68,11 @@ def load_model():
     if FLAGS.keep_training:
         global timestamp
         # fancy one liner to grab the most recent checkpoint dir name
-        timestamp = list(reversed(next(os.walk(FLAGS.checkpoint_dir))[1]))[0] 
-        checkpoint_path = os.path.join(FLAGS.checkpoint_dir, timestamp, "ckpt")
-        model.load_weights(checkpoint_path)
+        #timestamp = list(reversed(next(os.walk(FLAGS.checkpoint_dir))[1]))[0] 
+        #checkpoint_path = os.path.join(FLAGS.checkpoint_dir, timestamp, "ckpt")
+        checkpoint_path = os.path.join(FLAGS.checkpoint_dir, "ckpt")
+        if os.path.isfile(checkpoint_path + ".index"):
+            model.load_weights(checkpoint_path)
 
     optimizer = Adam(FLAGS.learning_rate)
     loss = MSE

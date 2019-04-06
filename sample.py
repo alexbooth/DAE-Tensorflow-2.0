@@ -18,6 +18,8 @@ from absl import flags
 flags.DEFINE_integer("sample_size", 10, "samples to test")
 flags.DEFINE_string("model", "./trained_model/DAE_model.h5", "todo")
 flags.DEFINE_boolean("use_noise", False, "sample noisey images")
+# TODO delete
+flags.DEFINE_integer("run_num", 0, "for frames")
 FLAGS = flags.FLAGS
 
 def sample(model, manager, n_samples):
@@ -60,23 +62,45 @@ def load_model():
     found_decoder_weights = False
     decoder_layer_cnt = 0
     for i, layer in enumerate(model.layers):
-        if not found_decoder_weights: 
-            found_decoder_weights = ("decoder_input" == layer.name)
-        else:
-            decoder.layers[decoder_layer_cnt] = layer
+        print(layer.name)
+        weights = layer.get_weights()
+        if len(layer.get_weights()) > 0:
+            print(weights[0].shape, weights[1].shape)
+        if "decoder_input" == layer.name:
+            found_decoder_weights = True
+        if found_decoder_weights:
             decoder_layer_cnt += 1
+            print("dec:" + decoder.layers[decoder_layer_cnt].name)
+            decoder.layers[decoder_layer_cnt].set_weights(weights)
 
-    #encoder.compile()
-    #decoder.compile()
     encoder.summary()
     decoder.summary()
 
-    return model
+    return encoder, decoder
+
+def sample_decoder(decoder):
+    Z = np.mgrid[-1:1:10j, -1:1:10j].reshape(2,-1).T 
+    X_pred = decoder.predict(Z)
+    out_img = np.zeros((10*32, 10*32))
+    for x in range(10):
+        for y in range(10):
+            x_begin = x*32
+            y_begin = y*32
+            x_end   = x_begin + 32
+            y_end   = y_begin + 32
+            out_img[x_begin:x_end, y_begin:y_end] = X_pred[x+y*10].reshape((32,32))
+    x_dim, y_dim = X_pred[0].shape[0], X_pred[0].shape[1]
+    X_pred_stitched = np.reshape(X_pred.swapaxes(0,1), (x_dim, y_dim*100))
+    plt.imsave("./image/frame_" + str(FLAGS.run_num) + ".png", out_img, format="png", vmin=-0.5, vmax=3)
+    
+        
 
 def main(argv):
     manager = DataManager()
-    model = load_model()
+    encoder, decoder = load_model()
     #sample(model, manager, FLAGS.sample_size)
+    sample_decoder(decoder)
+    sample_decoder(decoder)
 
 if __name__ == '__main__':
     app.run(main)
