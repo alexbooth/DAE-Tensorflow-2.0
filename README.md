@@ -1,5 +1,9 @@
 # Denoising Autoencoder in Tensorflow 2.x
 
+Demo of a DAE with eager execution in TF2 using the MNIST dataset. 
+
+<p align="center"><img src="sample_images/z2-sampled.gif"></p>
+
 ## Usage
 Begin training the model with ```train.py```  
 ```
