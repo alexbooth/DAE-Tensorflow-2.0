@@ -3,6 +3,7 @@
 Demo of a DAE with eager execution in TF2 using the MNIST dataset. 
 
 <p align="center"><img src="sample_images/z2-sampled.gif"></p>
+The above GIF shows the latent space of a DAE trained on MNIST (using the model in this repo) that is sampled from the decoder at at epochs 0..60. The latent space above was bound to 2 dimensions with each in (-1, 1).
 
 ## Usage
 Begin training the model with ```train.py```  
