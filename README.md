@@ -16,6 +16,10 @@ Begin training the model with ```train.py```
 --keep_best            (optional) save model only if it has the best loss so far
 --help
 ```
+Track training by starting Tensorboard and then navigate to ```localhost:6006``` in browser
+```
+tensorboard --logdir ./tmp/log/
+```
 Sample the training model with ```sample.py```  
 Note: Do not run sample.py and train.py at the same time, tensorflow will crash.
 ```
