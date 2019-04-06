@@ -43,7 +43,7 @@ def Decoder(Z):
 
 def AutoEncoder():
     X = tf.keras.Input(shape=(32, 32, 1))
-    Z = encoder(X)
-    X_pred = decoder(Z)
+    Z = Encoder(X)
+    X_pred = Decoder(Z)
     return tf.keras.Model(inputs=X, outputs=X_pred)
 

@@ -2,4 +2,4 @@
 *.swo
 __pycache__/
 tmp/
-checkpoints/
+trained_model/
