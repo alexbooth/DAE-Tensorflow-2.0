@@ -1,4 +1,4 @@
-# Denoising Autoencoder in Tensorflow 2.x
+# Denoising Autoencoder in Tensorflow 2.0
 
 Demo of a DAE with eager execution in TF2 using the MNIST dataset. 
 
